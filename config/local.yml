@@ -1,0 +1,25 @@
+server:
+  rootPath: /api/
+  applicationConnectors:
+    - type: http
+      port: 3003
+  adminConnectors:
+    - type: http
+      port: 3004
+databaseResource:
+  driverClass: com.mysql.cj.jdbc.Driver
+  user: root
+  password: 786Hh@786
+  url: jdbc:mysql://localhost:3306/ecom
+  properties:
+    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate.show_sql: true
+    charSet: UTF-8
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 5s
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+  # the minimum number of connections to keep open
+  minSize: 8
+  # the maximum number of connections to keep open
+  maxSize: 32
