@@ -25,10 +25,11 @@ public class Product {
     @Column(name="title")
     private String title;
 
-    @Column(name="desc")
-    private String desc;
+    @Column(name="description")
+    private String description;
 
     @Column(name="price")
-    private long price;
+    private double price;
+
 
 }

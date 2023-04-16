@@ -11,6 +11,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.hibernate.SessionFactory;
 
 public class EcomApplication extends Application<EcomConfiguration> {
 
@@ -33,14 +34,13 @@ public class EcomApplication extends Application<EcomConfiguration> {
     @Override
     public void run(EcomConfiguration ecomConfiguration, Environment environment) throws Exception {
         System.out.println("Server is up and running!");
+        final SessionFactory sessionFactory=hibernateBundle.getSessionFactory();
         // Register User Resource
-        final CustomerDao customerDAO = new CustomerDao(hibernateBundle.getSessionFactory());
-        final CustomerResource customerResource = new CustomerResource(customerDAO);
-        environment.jersey().register(customerResource);
+        final CustomerDao customerDAO = new CustomerDao(sessionFactory);
+        environment.jersey().register(new CustomerResource(customerDAO));
 
-        final ProductDao productDao=new ProductDao(hibernateBundle.getSessionFactory());
-        final ProductResource productResource=new ProductResource(productDao);
-        environment.jersey().register(productResource);
+        final ProductDao productDao=new ProductDao(sessionFactory);
+        environment.jersey().register(new ProductResource(productDao));
     }
 
     @Override

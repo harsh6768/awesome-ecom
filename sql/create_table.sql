@@ -13,7 +13,7 @@ CREATE TABLE `ecom`.`customers` (
 
 CREATE TABLE products (
   id BIGINT AUTO_INCREMENT NOT NULL,
-   name VARCHAR(255) NULL,
+   title VARCHAR(255) NULL,
    `description` VARCHAR(255) NULL,
    price DOUBLE NOT NULL,
    CONSTRAINT pk_products PRIMARY KEY (id)

@@ -16,7 +16,12 @@ public class ProductDao extends AbstractDAO<Product> {
 
     public void insert(Product product){
         try{
-           persist(product);
+//            product.setId(1);
+            System.out.println("Product-id--->:"+product.getId());
+            System.out.println("Product-desc--->:"+product.getDescription());
+            System.out.println("Product-title--->:"+product.getTitle());
+            System.out.println("Product-price--->:"+product.getPrice());
+            currentSession().persist(product);
         }catch(Exception error){
             System.out.println("Add-New_Product_Error::::->"+error);
         }
