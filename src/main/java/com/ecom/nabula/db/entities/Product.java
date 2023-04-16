@@ -8,24 +8,27 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
+@Table(name="products")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@NamedQueries({
+        @NamedQuery(name="Product.fineOne",query="Select p from Product p where p.id= :id")
+})
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name="title")
+    private String title;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name="desc")
+    private String desc;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name="price")
+    private long price;
 
 }

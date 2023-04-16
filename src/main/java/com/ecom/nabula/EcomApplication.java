@@ -41,9 +41,6 @@ public class EcomApplication extends Application<EcomConfiguration> {
         final ProductDao productDao=new ProductDao(hibernateBundle.getSessionFactory());
         final ProductResource productResource=new ProductResource(productDao);
         environment.jersey().register(productResource);
-
-
-
     }
 
     @Override
@@ -51,6 +48,5 @@ public class EcomApplication extends Application<EcomConfiguration> {
 //        super.initialize(bootstrap);
         loadHibernateBundle(bootstrap);
     }
-
 
 }

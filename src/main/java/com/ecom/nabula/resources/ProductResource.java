@@ -2,50 +2,56 @@ package com.ecom.nabula.resources;
 
 import com.ecom.nabula.db.dao.ProductDao;
 import com.ecom.nabula.db.entities.Product;
+import com.ecom.nabula.utils.CustomResponse;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.List;
 
 @Path("/products")
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ProductResource {
 
     private final ProductDao productDao;
-
-    public ProductResource(ProductDao productDao) {
-        this.productDao = productDao;
-    }
-
-    @GET
-    @UnitOfWork
-    public List<Product> getAll() {
-        return productDao.findAll();
-    }
-
-    @GET
-    @Path("/{id}")
-    @UnitOfWork
-    public Product getById(@PathParam("id") Long id) {
-        return productDao.findById(id)
-                .orElseThrow(() -> new NotFoundException("Product not found"));
+    public ProductResource(ProductDao productDao){
+        this.productDao=productDao;
     }
 
     @POST
+    @Path("/create")
     @UnitOfWork
-    public Response create(Product product) {
-        Product createdProduct = productDao.create(product);
-        return Response.created(URI.create("/products/" + createdProduct.getId())).build();
+    public CustomResponse addNewProduct(Product product){
+        try{
+            productDao.insert(product);
+           return CustomResponse.buildSuccessResponse("New Product Added!",product);
+        }catch (Exception error){
+            return CustomResponse.buildErrorResponse("Failed to insert new Product!");
+        }
     }
 
-    @DELETE
-    @Path("/{id}")
+    @GET
     @UnitOfWork
-    public void deleteById(@PathParam("id") Long id) {
-        productDao.deleteById(id);
+    public CustomResponse getAllProducts(Product product){
+        try{
+           List<Product> listOfProducts =productDao.findAll();
+           return  CustomResponse.buildSuccessResponse("All Products",listOfProducts);
+        }catch(Exception error){
+           return CustomResponse.buildErrorResponse("Failed to Fetch Products");
+        }
     }
+
+    @GET
+    @Path("/{id}/{testId}")
+    public CustomResponse getProductById(@PathParam("id") long id,@PathParam("testId") long testId){
+        try{
+          final Product product= productDao.findOne(id);
+          return CustomResponse.buildSuccessResponse("Product Detail!",product);
+        }catch (Exception error){
+            return CustomResponse.buildErrorResponse("Failed to Fetch Products");
+        }
+    }
+
+
 }
