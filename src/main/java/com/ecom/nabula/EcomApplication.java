@@ -9,12 +9,16 @@ import com.ecom.nabula.db.entities.Product;
 import com.ecom.nabula.resources.CustomerResource;
 import com.ecom.nabula.resources.OrderResource;
 import com.ecom.nabula.resources.ProductResource;
+import com.ecom.nabula.validator.CustomValidationExceptionMapper;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.hibernate.SessionFactory;
+
+import javax.validation.ValidatorFactory;
+import javax.xml.validation.Validator;
 
 public class EcomApplication extends Application<EcomConfiguration> {
 
@@ -37,6 +41,9 @@ public class EcomApplication extends Application<EcomConfiguration> {
     @Override
     public void run(EcomConfiguration ecomConfiguration, Environment environment) throws Exception {
         System.out.println("Server is up and running!");
+        // registering custom exeption to handle input validation
+        environment.jersey().register(new CustomValidationExceptionMapper());
+
         final SessionFactory sessionFactory=hibernateBundle.getSessionFactory();
         // Register User Resource
         final CustomerDao customerDao = new CustomerDao(sessionFactory);

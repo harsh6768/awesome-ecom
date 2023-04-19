@@ -5,6 +5,7 @@ import com.ecom.nabula.db.entities.Customer;
 import com.ecom.nabula.utils.CustomResponse;
 import io.dropwizard.hibernate.UnitOfWork;
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -27,7 +28,7 @@ public class CustomerResource {
     @POST
     @Path("/register")
     @UnitOfWork
-    public Response register(Customer customer) {
+    public Response register(@Valid Customer customer) {
         // Implement the registration logic here
         try{
             customerDAO.create(customer);
@@ -41,7 +42,7 @@ public class CustomerResource {
     @POST
     @Path("/login")
     @UnitOfWork
-    public CustomResponse login(Customer customer) {
+    public CustomResponse login(@Valid Customer customer) {
         // Implement the login logic here
         Optional<Customer> retrievedCustomer = customerDAO.findByEmail(customer.getEmail());
         if (retrievedCustomer.isPresent() && retrievedCustomer.get().getPassword().equals(customer.getPassword())) {

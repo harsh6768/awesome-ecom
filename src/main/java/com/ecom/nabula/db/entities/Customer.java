@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="customers")
@@ -26,12 +28,15 @@ public class Customer{
     @Column(name = "name")
     private String name;
 
+    @NotNull
+    @Email
     @Column(name = "email")
     private String email;
 
     @Column(name = "phone")
     private String phone;
 
+    @NotNull
     @Column(name = "password")
     private String password;
 
