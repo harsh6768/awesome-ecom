@@ -36,5 +36,4 @@ public class Cart {
     private double totalPrice;
 
 
-
 }

@@ -16,7 +16,11 @@ public class CustomerDao extends AbstractDAO<Customer> {
     }
 
     public Optional<Customer> findById(Long id) {
-        return Optional.ofNullable(get(id));
+        try{
+            return Optional.ofNullable(get(id));
+        }catch (Exception error){
+            throw  error;
+        }
     }
 
     public Customer create(Customer customer) {
