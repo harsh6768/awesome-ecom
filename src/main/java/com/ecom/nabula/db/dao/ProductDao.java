@@ -1,6 +1,7 @@
 package com.ecom.nabula.db.dao;
 
 import com.ecom.nabula.db.entities.Product;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class ProductDao extends AbstractDAO<Product> {
 
+    @Inject
     public ProductDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

@@ -3,6 +3,7 @@ package com.ecom.nabula.resources;
 import com.ecom.nabula.db.dao.CustomerDao;
 import com.ecom.nabula.db.entities.Customer;
 import com.ecom.nabula.utils.CustomResponse;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class CustomerResource {
 
     private final CustomerDao customerDAO;
-
+    @Inject
     public CustomerResource(CustomerDao customerDAO) {
         this.customerDAO = customerDAO;
     }

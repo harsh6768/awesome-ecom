@@ -3,6 +3,7 @@ package com.ecom.nabula.resources;
 import com.ecom.nabula.db.dao.OrderDao;
 import com.ecom.nabula.db.entities.Order;
 import com.ecom.nabula.utils.CustomResponse;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import java.util.List;
 public class OrderResource {
 
     final OrderDao orderDao;
+    @Inject
     public OrderResource(OrderDao orderDao){
         this.orderDao=orderDao;
     }

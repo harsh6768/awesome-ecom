@@ -3,6 +3,7 @@ package com.ecom.nabula.resources;
 import com.ecom.nabula.db.dao.ProductDao;
 import com.ecom.nabula.db.entities.Product;
 import com.ecom.nabula.utils.CustomResponse;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProductResource {
 
     private final ProductDao productDao;
+    @Inject
     public ProductResource(ProductDao productDao){
         this.productDao=productDao;
     }
@@ -33,7 +35,7 @@ public class ProductResource {
 
     @GET
     @UnitOfWork
-    public CustomResponse getAllProducts(Product product){
+    public CustomResponse getAllProducts(){
         try{
            List<Product> listOfProducts =productDao.findAll();
            return  CustomResponse.buildSuccessResponse("All Products",listOfProducts);

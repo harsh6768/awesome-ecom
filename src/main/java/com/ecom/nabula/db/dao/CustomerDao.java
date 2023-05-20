@@ -1,6 +1,7 @@
 package com.ecom.nabula.db.dao;
 
 import com.ecom.nabula.db.entities.Customer;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public class CustomerDao extends AbstractDAO<Customer> {
 
+    @Inject
     public CustomerDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

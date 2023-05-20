@@ -3,6 +3,7 @@ package com.ecom.nabula.db.dao;
 import com.ecom.nabula.db.entities.Customer;
 import com.ecom.nabula.db.entities.Order;
 import com.ecom.nabula.db.entities.Product;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -15,6 +16,7 @@ public class OrderDao extends AbstractDAO<Order> {
 
     final ProductDao productDao;
     final CustomerDao customerDao;
+    @Inject
     public OrderDao(SessionFactory sessionFactory,CustomerDao customerDao,ProductDao productDao) {
         super(sessionFactory);
         this.customerDao=customerDao;
